@@ -19,6 +19,8 @@ import solutions.alterego.bootstrap.di.Component;
 
 public class App extends Application {
 
+    public static Application AppInstance;
+
     public static IAndroidLogger L;
 
     ActivityLifecycleCallbacks mTrackingActivityLifecycleCallbacks = new ActivityLifecycleCallbacks() {
@@ -67,6 +69,8 @@ public class App extends Application {
     public void onCreate() {
         buildComponentAndInject();
         super.onCreate();
+
+        AppInstance = this;
 
         if (BuildConfig.DEBUG) {
             L = new DetailedAndroidLogger("BOOTSTRAP", IAndroidLogger.LoggingLevel.VERBOSE);
