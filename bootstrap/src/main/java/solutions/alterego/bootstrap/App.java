@@ -4,6 +4,7 @@ import com.alterego.advancedandroidlogger.implementations.DetailedAndroidLogger;
 import com.alterego.advancedandroidlogger.implementations.NullAndroidLogger;
 import com.alterego.advancedandroidlogger.interfaces.IAndroidLogger;
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.stetho.Stetho;
 
 import net.danlew.android.joda.JodaTimeAndroid;
 
@@ -72,6 +73,10 @@ public class App extends Application {
 
         if (BuildConfig.DEBUG) {
             L = new DetailedAndroidLogger("BOOTSTRAP", IAndroidLogger.LoggingLevel.VERBOSE);
+            Stetho.initialize(Stetho.newInitializerBuilder(this)
+                    .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
+                    .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this))
+                    .build());
         } else {
             L = NullAndroidLogger.instance;
         }
