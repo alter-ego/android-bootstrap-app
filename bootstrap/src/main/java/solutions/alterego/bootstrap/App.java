@@ -15,20 +15,16 @@ import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
-import rx.subjects.BehaviorSubject;
 import solutions.alterego.bootstrap.di.Component;
 
 public class App extends Application {
 
     public static IAndroidLogger L;
 
-    public static BehaviorSubject<Activity> Activity = BehaviorSubject.create();
-
     ActivityLifecycleCallbacks mTrackingActivityLifecycleCallbacks = new ActivityLifecycleCallbacks() {
         @Override
         public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
             activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
-            Activity.onNext(activity);
         }
 
         @Override
