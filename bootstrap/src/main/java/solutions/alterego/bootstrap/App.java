@@ -14,10 +14,11 @@ import android.app.Application;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.support.multidex.MultiDexApplication;
 
 import solutions.alterego.bootstrap.di.Component;
 
-public class App extends Application {
+public class App extends MultiDexApplication {
 
     public static Application AppInstance;
 

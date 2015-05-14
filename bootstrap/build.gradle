@@ -33,6 +33,7 @@ android {
         targetSdkVersion 22
         versionCode 2
         versionName "1.1"
+        multiDexEnabled true
     }
 
     compileOptions {
@@ -62,6 +63,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.1.1'
     compile 'com.alterego:advancedandroidlogger:1.0.3@aar'
+    compile 'com.android.support:multidex:1.0.0'
 
     compile 'com.jakewharton:butterknife:6.1.0'
     compile 'com.hannesdorfmann.fragmentargs:annotation:2.0.1'
