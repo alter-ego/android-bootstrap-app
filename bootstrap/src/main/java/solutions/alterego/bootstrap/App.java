@@ -4,6 +4,8 @@ import com.alterego.advancedandroidlogger.implementations.DetailedAndroidLogger;
 import com.alterego.advancedandroidlogger.implementations.NullAndroidLogger;
 import com.alterego.advancedandroidlogger.interfaces.IAndroidLogger;
 
+import net.danlew.android.joda.JodaTimeAndroid;
+
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
@@ -73,6 +75,7 @@ public class App extends Application {
             L = NullAndroidLogger.instance;
         }
 
+        JodaTimeAndroid.init(this);
         registerActivityLifecycleCallbacks(mTrackingActivityLifecycleCallbacks);
     }
 
