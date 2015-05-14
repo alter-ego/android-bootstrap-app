@@ -3,6 +3,7 @@ package solutions.alterego.bootstrap;
 import com.alterego.advancedandroidlogger.implementations.DetailedAndroidLogger;
 import com.alterego.advancedandroidlogger.implementations.NullAndroidLogger;
 import com.alterego.advancedandroidlogger.interfaces.IAndroidLogger;
+import com.facebook.drawee.backends.pipeline.Fresco;
 
 import net.danlew.android.joda.JodaTimeAndroid;
 
@@ -76,6 +77,7 @@ public class App extends Application {
         }
 
         JodaTimeAndroid.init(this);
+        Fresco.initialize(this);
         registerActivityLifecycleCallbacks(mTrackingActivityLifecycleCallbacks);
     }
 
