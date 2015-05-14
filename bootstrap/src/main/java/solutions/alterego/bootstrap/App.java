@@ -71,7 +71,7 @@ public class App extends Application {
         super.onCreate();
 
         if (BuildConfig.DEBUG) {
-            L = new DetailedAndroidLogger("OVOAPP", IAndroidLogger.LoggingLevel.VERBOSE);
+            L = new DetailedAndroidLogger("BOOTSTRAP", IAndroidLogger.LoggingLevel.VERBOSE);
         } else {
             L = NullAndroidLogger.instance;
         }
