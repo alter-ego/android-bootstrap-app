@@ -1,4 +1,4 @@
-package solutions.alterego.bootstrap;
+package solutions.alterego.bootstrap.screens.main;
 
 import com.mikepenz.iconics.typeface.FontAwesome;
 import com.mikepenz.materialdrawer.Drawer;
@@ -15,6 +15,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
+
+import solutions.alterego.bootstrap.R;
 
 public class SimpleFragmentDrawerActivity extends AppCompatActivity {
 

@@ -5,7 +5,7 @@ import javax.inject.Singleton;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import solutions.alterego.bootstrap.App;
-import solutions.alterego.bootstrap.MainActivity;
+import solutions.alterego.bootstrap.screens.main.MainActivity;
 
 @Singleton
 @dagger.Component(modules = {ManagersModule.class, ProvidersModule.class})

@@ -1,4 +1,4 @@
-package solutions.alterego.bootstrap;
+package solutions.alterego.bootstrap.screens.main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.view.MenuItem;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import solutions.alterego.bootstrap.App;
+import solutions.alterego.bootstrap.R;
 import solutions.alterego.bootstrap.core.BaseActivity;
 
 public class MainActivity extends BaseActivity {

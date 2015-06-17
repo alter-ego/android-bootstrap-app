@@ -1,4 +1,4 @@
-package solutions.alterego.bootstrap;
+package solutions.alterego.bootstrap.screens.main;
 
 
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import solutions.alterego.bootstrap.R;
 
 
 /**
