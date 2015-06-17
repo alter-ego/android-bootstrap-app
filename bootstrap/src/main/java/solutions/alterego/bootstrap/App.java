@@ -1,5 +1,6 @@
 package solutions.alterego.bootstrap;
 
+import com.alterego.advancedandroidlogger.implementations.AndroidLogger;
 import com.alterego.advancedandroidlogger.implementations.DetailedAndroidLogger;
 import com.alterego.advancedandroidlogger.implementations.NullAndroidLogger;
 import com.alterego.advancedandroidlogger.interfaces.IAndroidLogger;
@@ -22,7 +23,7 @@ public class App extends MultiDexApplication {
 
     public static Application AppInstance;
 
-    public static IAndroidLogger L;
+    public static IAndroidLogger L = NullAndroidLogger.instance;
 
     ActivityLifecycleCallbacks mTrackingActivityLifecycleCallbacks = new ActivityLifecycleCallbacks() {
         @Override
@@ -73,15 +74,15 @@ public class App extends MultiDexApplication {
 
         AppInstance = this;
 
-        if (BuildConfig.DEBUG) {
+        if (BuildConfig.BUILD_TYPE.equals("debug")) {
             L = new DetailedAndroidLogger("BOOTSTRAP", IAndroidLogger.LoggingLevel.VERBOSE);
             LeakCanary.install(this);
             Stetho.initialize(Stetho.newInitializerBuilder(this)
                     .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
                     .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this))
                     .build());
-        } else {
-            L = NullAndroidLogger.instance;
+        } else if (BuildConfig.BUILD_TYPE.equals("qatesting")) {
+            L = new AndroidLogger("BOOTSTRAP", IAndroidLogger.LoggingLevel.DEBUG);
         }
 
         JodaTimeAndroid.init(this);
