@@ -21,6 +21,7 @@ plugins {
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'com.trello.victor'
+apply from: '../jacoco.gradle'
 
 repositories {
     jcenter()
@@ -51,6 +52,11 @@ android {
     buildTypes {
         debug {
             applicationIdSuffix ".debug"
+            testCoverageEnabled true
+
+            // Extra fields used to configure Robolectric test suites.
+            buildConfigField "int", "TEST_TARGET_SDK_VERSION", "21"
+            buildConfigField "String", "TEST_APPLICATION_ID", "\"solutions.alterego.bootstrap.debug\""
         }
         qatesting.initWith(buildTypes.debug)
         release {
@@ -78,6 +84,21 @@ android {
     sourceSets {
         main {
             svg.srcDir 'src/main/svg'
+        }
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+
+        unitTests.all {
+            jvmArgs '-Xmx512m'
+            systemProperty 'robolectric.logging.enable', 'true'
+        }
+    }
+
+    tasks.withType(Test) {
+        testLogging {
+            events "started", "passed", "skipped", "failed", "standardOut", "standardError"
         }
     }
 }
@@ -117,4 +138,23 @@ dependencies {
     compile('com.mikepenz.materialdrawer:library:2.9.2@aar') {
         transitive = true
     }
+
+    //unit testing
+    androidTestCompile 'com.google.dexmaker:dexmaker:1.2'
+    androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.2'
+    androidTestCompile 'com.github.fabioCollini:DaggerMock:0.5'
+
+    testCompile('junit:junit:4.12') {
+        exclude module: 'hamcrest'
+        exclude module: 'hamcrest-core'
+    }
+    testCompile 'org.easytesting:fest-assert-core:2.0M10'
+    testCompile('org.mockito:mockito-core:1.10.19') {
+        exclude module: 'hamcrest'
+        exclude module: 'hamcrest-core'
+    }
+    testCompile 'org.hamcrest:hamcrest-library:1.3'
+    testCompile 'com.github.fabioCollini:DaggerMock:0.5'
+    testCompile "org.robolectric:robolectric:3.0"
+    testCompile "org.robolectric:shadows-multidex:3.0"
 }

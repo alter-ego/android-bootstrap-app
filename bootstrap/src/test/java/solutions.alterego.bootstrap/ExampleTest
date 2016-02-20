@@ -1,0 +1,40 @@
+package solutions.alterego.bootstrap;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.robolectric.RuntimeEnvironment;
+
+import it.cosenonjaviste.daggermock.DaggerMockRule;
+import solutions.alterego.bootstrap.di.Component;
+import solutions.alterego.bootstrap.di.ManagersModule;
+
+public class ExampleTest extends BaseRobolectricTest {
+
+    @Rule
+    public DaggerMockRule<Component> mockitoRule = new DaggerMockRule<Component>(Component.class,
+            new ManagersModule((App) RuntimeEnvironment.application))
+            .set(new DaggerMockRule.ComponentSetter<Component>() {
+                @Override
+                public void setComponent(Component component) {
+                    ((App) RuntimeEnvironment.application).setComponent(component);
+                }
+            });
+
+    @Before
+    public void setUp() {
+        //do nothing
+    }
+
+    @After
+    public void tearDown() {
+        //do nothing
+    }
+
+    @Test
+    public void testExample() {
+        //do nothing
+    }
+
+}
