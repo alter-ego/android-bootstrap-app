@@ -15,15 +15,21 @@ import android.app.Application;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.support.annotation.VisibleForTesting;
 import android.support.multidex.MultiDexApplication;
 
+import retrofit.RestAdapter;
 import solutions.alterego.bootstrap.di.Component;
 
 public class App extends MultiDexApplication {
 
+    public static final String LOGGING_TAG = "BOOTSTRAP";
+
     public static Application AppInstance;
 
     public static IAndroidLogger L = NullAndroidLogger.instance;
+
+    public static RestAdapter.LogLevel ApiServiceLogLevel = RestAdapter.LogLevel.NONE;
 
     ActivityLifecycleCallbacks mTrackingActivityLifecycleCallbacks = new ActivityLifecycleCallbacks() {
         @Override
@@ -69,20 +75,17 @@ public class App extends MultiDexApplication {
 
     @Override
     public void onCreate() {
-        buildComponentAndInject();
+        component = buildComponentAndInject();
         super.onCreate();
 
         AppInstance = this;
 
         if (BuildConfig.BUILD_TYPE.equals("debug")) {
-            L = new DetailedAndroidLogger("BOOTSTRAP", IAndroidLogger.LoggingLevel.VERBOSE);
-            LeakCanary.install(this);
-            Stetho.initialize(Stetho.newInitializerBuilder(this)
-                    .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
-                    .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this))
-                    .build());
+            initDebug();
         } else if (BuildConfig.BUILD_TYPE.equals("qatesting")) {
-            L = new AndroidLogger("BOOTSTRAP", IAndroidLogger.LoggingLevel.DEBUG);
+            initQA();
+        } else {
+            initRelease();
         }
 
         JodaTimeAndroid.init(this);
@@ -90,7 +93,32 @@ public class App extends MultiDexApplication {
         registerActivityLifecycleCallbacks(mTrackingActivityLifecycleCallbacks);
     }
 
-    public void buildComponentAndInject() {
-        component = Component.Initializer.init(this);
+    public Component buildComponentAndInject() {
+        return Component.Initializer.init(this);
+    }
+
+    @VisibleForTesting
+    public void setComponent(Component component) {
+        this.component = component;
+    }
+
+    protected void initDebug() {
+        L = new DetailedAndroidLogger(LOGGING_TAG, IAndroidLogger.LoggingLevel.VERBOSE);
+        ApiServiceLogLevel = RestAdapter.LogLevel.FULL;
+        LeakCanary.install(this);
+        Stetho.initialize(Stetho.newInitializerBuilder(this)
+                .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
+                .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this))
+                .build());
+    }
+
+    protected void initQA() {
+        L = new AndroidLogger(LOGGING_TAG, IAndroidLogger.LoggingLevel.DEBUG);
+        ApiServiceLogLevel = RestAdapter.LogLevel.BASIC;
+    }
+
+    protected void initRelease() {
+        L = new AndroidLogger(LOGGING_TAG, IAndroidLogger.LoggingLevel.WARNING);
+        ApiServiceLogLevel = RestAdapter.LogLevel.NONE;
     }
 }
