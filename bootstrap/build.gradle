@@ -6,7 +6,12 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:1.5.0'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        classpath "me.tatarka:gradle-retrolambda:3.2.0"
+        classpath 'me.tatarka.retrolambda.projectlombok:lombok.ast:0.2.3.a2'
+        classpath 'com.trello:victor:0.1.5'
     }
+
+    configurations.classpath.exclude group: 'com.android.tools.external.lombok'
 }
 
 plugins {
@@ -15,12 +20,14 @@ plugins {
 
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'com.trello.victor'
 
 repositories {
     jcenter()
     mavenCentral()
     maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
     maven { url "https://github.com/alter-ego/advanced-android-logger/raw/develop/releases/" }
+    maven { url "https://jitpack.io" }
 }
 
 android {
@@ -42,6 +49,9 @@ android {
     }
 
     buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+        }
         qatesting.initWith(buildTypes.debug)
         release {
             minifyEnabled false
@@ -51,12 +61,24 @@ android {
 
     lintOptions {
         disable 'InvalidPackage'
+        abortOnError false
+    }
+
+    dexOptions {
+        incremental true
+        javaMaxHeapSize "4g"
     }
 
     packagingOptions {
         exclude 'META-INF/services/javax.annotation.processing.Processor'
         exclude 'META-INF/LICENSE.txt'
         exclude 'META-INF/NOTICE.txt'
+    }
+
+    sourceSets {
+        main {
+            svg.srcDir 'src/main/svg'
+        }
     }
 }
 
