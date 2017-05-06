@@ -133,11 +133,27 @@ dependencies {
     }
 
     //unit testing
+    androidTestCompile 'org.easytesting:fest-assert-core:2.0M10'
     androidTestCompile "com.linkedin.dexmaker:dexmaker:$dexmaker_version"
     androidTestCompile "com.linkedin.dexmaker:dexmaker-mockito:$dexmaker_version"
     androidTestCompile "com.github.fabioCollini:DaggerMock:$dagger_mock_version"
-    androidTestCompile "com.google.dagger:dagger:$dagger_version"
     androidTestAnnotationProcessor "com.google.dagger:dagger-compiler:$dagger_version"
+    androidTestCompile("com.google.dagger:dagger:$dagger_version") {
+        exclude group: 'javax.annotation'
+    }
+
+    androidTestCompile("com.android.support.test.espresso:espresso-core:$espresso_version") {
+        exclude module: 'dagger'
+    }
+    androidTestCompile("com.android.support.test.espresso:espresso-contrib:$espresso_version") {
+        exclude module: 'dagger'
+    }
+    androidTestCompile "com.android.support.test.espresso:espresso-intents:$espresso_version"
+    androidTestCompile 'com.android.support.test:runner:0.5'
+    androidTestCompile "com.android.support:appcompat-v7:$support_libraries_version"
+
+    androidTestCompile "com.android.support:recyclerview-v7:$support_libraries_version"
+    androidTestCompile "com.android.support:design:$support_libraries_version"
 
     testCompile('junit:junit:4.12') {
         exclude module: 'hamcrest'
@@ -152,6 +168,6 @@ dependencies {
     testCompile "com.google.dagger:dagger:$dagger_version"
     testCompile "com.google.dagger:dagger-compiler:$dagger_version"
     testCompile "com.github.fabioCollini:DaggerMock:$dagger_mock_version"
-    testCompile "org.robolectric:robolectric:3.0"
-    testCompile "org.robolectric:shadows-multidex:3.0"
+    testCompile "org.robolectric:robolectric:3.3.2"
+    testCompile "org.robolectric:shadows-multidex:3.3.2"
 }

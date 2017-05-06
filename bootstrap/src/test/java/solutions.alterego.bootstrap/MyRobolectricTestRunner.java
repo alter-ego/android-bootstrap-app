@@ -1,7 +1,7 @@
 package solutions.alterego.bootstrap;
 
 import org.junit.runners.model.InitializationError;
-import org.robolectric.RobolectricGradleTestRunner;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.manifest.AndroidManifest;
 import org.robolectric.res.Fs;
@@ -9,7 +9,7 @@ import org.robolectric.res.Fs;
 import io.reactivex.plugins.RxJavaPlugins;
 import io.reactivex.schedulers.Schedulers;
 
-public class MyRobolectricTestRunner extends RobolectricGradleTestRunner {
+public class MyRobolectricTestRunner extends RobolectricTestRunner {
 
     public MyRobolectricTestRunner(Class<?> klass) throws InitializationError {
         super(klass);
@@ -19,6 +19,7 @@ public class MyRobolectricTestRunner extends RobolectricGradleTestRunner {
         RxJavaPlugins.setNewThreadSchedulerHandler(scheduler -> Schedulers.trampoline());
     }
 
+    @Override
     protected AndroidManifest getAppManifest(Config config) {
 
         String manifest = "src/main/AndroidManifest.xml";
