@@ -20,7 +20,6 @@ plugins {
 
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
-apply plugin: 'com.trello.victor'
 apply from: '../jacoco.gradle'
 
 repositories {
@@ -78,12 +77,6 @@ android {
         exclude 'META-INF/services/javax.annotation.processing.Processor'
         exclude 'META-INF/LICENSE.txt'
         exclude 'META-INF/NOTICE.txt'
-    }
-
-    sourceSets {
-        main {
-            svg.srcDir 'src/main/svg'
-        }
     }
 
     testOptions {

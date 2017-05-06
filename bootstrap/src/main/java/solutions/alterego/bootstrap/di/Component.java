@@ -16,8 +16,7 @@ public interface Component {
     void inject(MainActivity mainActivity);
 
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
-    public final static class Initializer {
-
+    final class Initializer {
         public static Component init(App app) {
             return DaggerComponent.builder()
                     .managersModule(new ManagersModule(app))

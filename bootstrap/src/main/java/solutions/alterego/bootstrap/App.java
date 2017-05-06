@@ -11,7 +11,6 @@ import com.squareup.leakcanary.LeakCanary;
 import net.danlew.android.joda.JodaTimeAndroid;
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -24,8 +23,6 @@ import solutions.alterego.bootstrap.di.Component;
 public class App extends MultiDexApplication {
 
     public static final String LOGGING_TAG = "BOOTSTRAP";
-
-    public static Application AppInstance;
 
     public static IAndroidLogger L = NullAndroidLogger.instance;
 
@@ -78,7 +75,7 @@ public class App extends MultiDexApplication {
         component = buildComponentAndInject();
         super.onCreate();
 
-        AppInstance = this;
+        component.inject(this);
 
         if (BuildConfig.BUILD_TYPE.equals("debug")) {
             initDebug();
