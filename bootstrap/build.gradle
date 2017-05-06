@@ -116,7 +116,7 @@ dependencies {
     compile "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
 
     compile 'com.google.code.gson:gson:2.8.0'
-    compile 'net.danlew:android.joda:2.9.5.1'
+    compile 'net.danlew:android.joda:2.9.9'
 
     compile "com.facebook.stetho:stetho:$stetho_version"
     debugCompile "com.squareup.leakcanary:leakcanary-android:$leakcanary_version"
