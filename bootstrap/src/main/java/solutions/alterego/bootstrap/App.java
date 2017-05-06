@@ -4,7 +4,6 @@ import com.alterego.advancedandroidlogger.implementations.AndroidLogger;
 import com.alterego.advancedandroidlogger.implementations.DetailedAndroidLogger;
 import com.alterego.advancedandroidlogger.implementations.NullAndroidLogger;
 import com.alterego.advancedandroidlogger.interfaces.IAndroidLogger;
-import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.stetho.Stetho;
 import com.squareup.leakcanary.LeakCanary;
 
@@ -84,7 +83,6 @@ public class App extends MultiDexApplication {
         }
 
         JodaTimeAndroid.init(this);
-        Fresco.initialize(this);
         registerActivityLifecycleCallbacks(mTrackingActivityLifecycleCallbacks);
     }
 

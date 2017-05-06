@@ -11,6 +11,9 @@ ext {
     retrolambda_gradle_version = '3.2.5'
 
     support_libraries_version = '25.3.0'
+    dagger_version = '2.7'
+    dagger_mock_version = '0.6'
+    dexmaker_version = '2.2.0'
     lombok_version = '1.16.12'
     leakcanary_version = '1.5'
     stetho_version = '1.4.2'
@@ -21,6 +24,7 @@ buildscript {
     repositories {
         jcenter()
         mavenCentral()
+        maven { url "https://jitpack.io" }
     }
     dependencies {
         classpath "com.android.tools.build:gradle:2.3.1"
@@ -30,5 +34,7 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        mavenCentral()
+        maven { url "https://jitpack.io" }
     }
 }
