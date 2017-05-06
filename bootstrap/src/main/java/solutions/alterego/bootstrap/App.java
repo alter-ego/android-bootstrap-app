@@ -82,8 +82,6 @@ public class App extends MultiDexApplication {
 
         if (BuildConfig.BUILD_TYPE.equals("debug")) {
             initDebug();
-        } else if (BuildConfig.BUILD_TYPE.equals("qatesting")) {
-            initQA();
         } else {
             initRelease();
         }
@@ -110,11 +108,6 @@ public class App extends MultiDexApplication {
                 .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
                 .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this))
                 .build());
-    }
-
-    protected void initQA() {
-        L = new AndroidLogger(LOGGING_TAG, IAndroidLogger.LoggingLevel.DEBUG);
-        ApiServiceLogLevel = RestAdapter.LogLevel.BASIC;
     }
 
     protected void initRelease() {

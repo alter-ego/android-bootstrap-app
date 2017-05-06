@@ -20,12 +20,6 @@ public class MyIntegrationTestApp extends App {
     }
 
     @Override
-    protected void initQA() {
-        L = NullAndroidLogger.instance;
-        ApiServiceLogLevel = RestAdapter.LogLevel.BASIC;
-    }
-
-    @Override
     protected void initRelease() {
         L = NullAndroidLogger.instance;
         ApiServiceLogLevel = RestAdapter.LogLevel.NONE;
