@@ -1,14 +1,29 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+ext {
+    app_version_code = 4
+    app_version_name = "1.3"
+
+    min_sdk = 16
+    compile_sdk = 25
+    target_sdk = 23
+
+    build_tools_version = '25.0.2'
+    gradle_tools_version = '2.3.1'
+    retrolambda_gradle_version = '3.2.5'
+
+    support_libraries_version = '25.3.0'
+    lombok_version = '1.16.12'
+    leakcanary_version = '1.5'
+    stetho_version = '1.4.2'
+    espresso_version = '2.2.2'
+}
 
 buildscript {
     repositories {
         jcenter()
+        mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.5.0'
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        classpath "com.android.tools.build:gradle:2.3.1"
     }
 }
 
