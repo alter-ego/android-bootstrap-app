@@ -78,6 +78,9 @@ android {
         unitTests.all {
             jvmArgs '-Xmx512m'
             systemProperty 'robolectric.logging.enable', 'true'
+            jacoco {
+                includeNoLocationClasses = true
+            }
         }
     }
 
