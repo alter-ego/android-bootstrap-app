@@ -1,12 +1,10 @@
 # Android Bootstrap App
 
-* Advanced Android Logger
-* RxAndroid
+* RxJava
 * Retrofit
 * Butterknife
-* FragmentArgs
 * Lombok
 * Dagger2
-* Parceler
 * Gson
 * JodaTime
+* Advanced Android Logger
