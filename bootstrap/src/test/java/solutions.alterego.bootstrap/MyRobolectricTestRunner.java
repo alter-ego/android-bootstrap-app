@@ -6,35 +6,17 @@ import org.robolectric.annotation.Config;
 import org.robolectric.manifest.AndroidManifest;
 import org.robolectric.res.Fs;
 
-import rx.Scheduler;
-import rx.plugins.RxJavaPlugins;
-import rx.plugins.RxJavaSchedulersHook;
-import rx.plugins.RxJavaTestPlugins;
-import rx.schedulers.Schedulers;
+import io.reactivex.plugins.RxJavaPlugins;
+import io.reactivex.schedulers.Schedulers;
 
 public class MyRobolectricTestRunner extends RobolectricGradleTestRunner {
 
     public MyRobolectricTestRunner(Class<?> klass) throws InitializationError {
         super(klass);
 
-        RxJavaTestPlugins.resetPlugins();
-        RxJavaPlugins.getInstance().registerSchedulersHook(new RxJavaSchedulersHook() {
-            @Override
-            public Scheduler getIOScheduler() {
-                return Schedulers.immediate();
-            }
-
-            @Override
-            public Scheduler getComputationScheduler() {
-                return Schedulers.immediate();
-            }
-
-            @Override
-            public Scheduler getNewThreadScheduler() {
-                return Schedulers.immediate();
-            }
-        });
-
+        RxJavaPlugins.setIoSchedulerHandler(scheduler -> Schedulers.trampoline());
+        RxJavaPlugins.setComputationSchedulerHandler(scheduler -> Schedulers.trampoline());
+        RxJavaPlugins.setNewThreadSchedulerHandler(scheduler -> Schedulers.trampoline());
     }
 
     protected AndroidManifest getAppManifest(Config config) {

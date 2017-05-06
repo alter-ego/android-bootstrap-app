@@ -12,12 +12,9 @@ import android.os.Bundle;
 import android.support.annotation.VisibleForTesting;
 import android.support.multidex.MultiDexApplication;
 
-import retrofit.RestAdapter;
 import solutions.alterego.bootstrap.di.Component;
 
 public class App extends MultiDexApplication {
-
-    public static RestAdapter.LogLevel ApiServiceLogLevel = RestAdapter.LogLevel.NONE;
 
     ActivityLifecycleCallbacks mTrackingActivityLifecycleCallbacks = new ActivityLifecycleCallbacks() {
         @Override
@@ -66,12 +63,16 @@ public class App extends MultiDexApplication {
         component = buildComponentAndInject();
         super.onCreate();
 
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return;
+        }
+
         component.inject(this);
 
         if (BuildConfig.BUILD_TYPE.equals("debug")) {
             initDebug();
-        } else {
-            initRelease();
         }
 
         JodaTimeAndroid.init(this);
@@ -88,7 +89,6 @@ public class App extends MultiDexApplication {
     }
 
     protected void initDebug() {
-        ApiServiceLogLevel = RestAdapter.LogLevel.FULL;
         LeakCanary.install(this);
         Stetho.initialize(Stetho.newInitializerBuilder(this)
                 .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
@@ -96,7 +96,4 @@ public class App extends MultiDexApplication {
                 .build());
     }
 
-    protected void initRelease() {
-        ApiServiceLogLevel = RestAdapter.LogLevel.NONE;
-    }
 }

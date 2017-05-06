@@ -38,4 +38,13 @@ public class ProvidersModule {
             return new AndroidLogger(LOGGING_TAG, IAndroidLogger.LoggingLevel.WARNING);
         }
     }
+
+    @Provides
+    public HttpLoggingInterceptor.Level provideHttpLoggingLevel() {
+        if (BuildConfig.BUILD_TYPE.equals("debug")) {
+            return HttpLoggingInterceptor.Level.BODY;
+        } else {
+            return HttpLoggingInterceptor.Level.NONE;
+        }
+    }
 }
