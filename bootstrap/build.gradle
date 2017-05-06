@@ -98,8 +98,6 @@ dependencies {
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterknife_version"
     compile "com.jakewharton:butterknife:$butterknife_version"
 
-    compile 'com.hannesdorfmann.fragmentargs:annotation:2.0.1'
-    annotationProcessor 'com.hannesdorfmann.fragmentargs:processor:2.0.1'
     annotationProcessor "org.projectlombok:lombok:$lombok_version"
     provided "org.projectlombok:lombok:$lombok_version"
 
@@ -107,9 +105,6 @@ dependencies {
     compile "com.google.dagger:dagger:$dagger_version"
     provided 'javax.annotation:jsr250-api:1.0'
     
-    compile "org.parceler:parceler-api:0.2.16"
-    provided "org.parceler:parceler:0.2.16"
-
     compile "io.reactivex.rxjava2:rxjava:2.0.8"
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'nl.littlerobots.rxlint:rxlint:1.2'
