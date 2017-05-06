@@ -54,12 +54,16 @@ android {
             testCoverageEnabled true
 
             // Extra fields used to configure Robolectric test suites.
-            buildConfigField "int", "TEST_TARGET_SDK_VERSION", "21"
+            buildConfigField "int", "TEST_TARGET_SDK_VERSION", "25"
             buildConfigField "String", "TEST_APPLICATION_ID", "\"solutions.alterego.bootstrap.debug\""
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            // Extra fields used to configure Robolectric test suites.
+            buildConfigField "int", "TEST_TARGET_SDK_VERSION", "25"
+            buildConfigField "String", "TEST_APPLICATION_ID", "\"solutions.alterego.bootstrap\""
         }
     }
 
@@ -125,6 +129,8 @@ dependencies {
 
     compile 'com.facebook.stetho:stetho:1.3.0'
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.3'
+    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.3'
+    androidTestCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.3'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.3'
 
     compile('com.mikepenz.materialdrawer:library:2.9.2@aar') {
