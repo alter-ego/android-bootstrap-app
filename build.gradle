@@ -13,6 +13,7 @@ ext {
     support_libraries_version = '25.3.0'
     dagger_version = '2.7'
     dagger_mock_version = '0.6'
+    butterknife_version = '8.5.1'
     dexmaker_version = '2.2.0'
     lombok_version = '1.16.12'
     retrofit_version = '2.2.0'

@@ -12,6 +12,7 @@ import javax.inject.Named;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 import solutions.alterego.bootstrap.App;
 import solutions.alterego.bootstrap.R;
 import solutions.alterego.bootstrap.core.BaseActivity;
@@ -22,12 +23,20 @@ public class MainActivity extends BaseActivity {
     @Named("logger")
     IAndroidLogger mLogger;
 
+    private Unbinder unbinder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+        unbinder = ButterKnife.bind(this);
         App.component(this).inject(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbinder.unbind();
     }
 
     @OnClick(R.id.button)

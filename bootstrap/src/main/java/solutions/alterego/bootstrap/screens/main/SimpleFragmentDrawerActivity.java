@@ -16,6 +16,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import solutions.alterego.bootstrap.R;
 
 public class SimpleFragmentDrawerActivity extends AppCompatActivity {
@@ -23,13 +26,17 @@ public class SimpleFragmentDrawerActivity extends AppCompatActivity {
     //save our header or result
     private Drawer.Result result = null;
 
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
+    private Unbinder unbinder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sample_fragment_dark_toolbar);
 
-        // Handle Toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        unbinder = ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 
         //Create the drawer
@@ -81,6 +88,13 @@ public class SimpleFragmentDrawerActivity extends AppCompatActivity {
         //add the values which need to be saved from the drawer to the bundle
         outState = result.saveInstanceState(outState);
         super.onSaveInstanceState(outState);
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbinder.unbind();
     }
 
     @Override

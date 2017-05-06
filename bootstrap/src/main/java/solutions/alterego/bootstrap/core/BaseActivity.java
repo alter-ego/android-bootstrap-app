@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 
-import butterknife.ButterKnife;
 import solutions.alterego.bootstrap.BuildConfig;
 
 public class BaseActivity extends AppCompatActivity {
@@ -25,9 +24,4 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        ButterKnife.unbind(this);
-    }
 }
