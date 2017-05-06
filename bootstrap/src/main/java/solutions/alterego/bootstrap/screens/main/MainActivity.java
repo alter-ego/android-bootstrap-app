@@ -1,9 +1,14 @@
 package solutions.alterego.bootstrap.screens.main;
 
+import com.alterego.advancedandroidlogger.interfaces.IAndroidLogger;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -12,6 +17,10 @@ import solutions.alterego.bootstrap.R;
 import solutions.alterego.bootstrap.core.BaseActivity;
 
 public class MainActivity extends BaseActivity {
+
+    @Inject
+    @Named("logger")
+    IAndroidLogger mLogger;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

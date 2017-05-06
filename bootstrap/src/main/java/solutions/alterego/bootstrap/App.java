@@ -1,9 +1,5 @@
 package solutions.alterego.bootstrap;
 
-import com.alterego.advancedandroidlogger.implementations.AndroidLogger;
-import com.alterego.advancedandroidlogger.implementations.DetailedAndroidLogger;
-import com.alterego.advancedandroidlogger.implementations.NullAndroidLogger;
-import com.alterego.advancedandroidlogger.interfaces.IAndroidLogger;
 import com.facebook.stetho.Stetho;
 import com.squareup.leakcanary.LeakCanary;
 
@@ -20,10 +16,6 @@ import retrofit.RestAdapter;
 import solutions.alterego.bootstrap.di.Component;
 
 public class App extends MultiDexApplication {
-
-    public static final String LOGGING_TAG = "BOOTSTRAP";
-
-    public static IAndroidLogger L = NullAndroidLogger.instance;
 
     public static RestAdapter.LogLevel ApiServiceLogLevel = RestAdapter.LogLevel.NONE;
 
@@ -96,7 +88,6 @@ public class App extends MultiDexApplication {
     }
 
     protected void initDebug() {
-        L = new DetailedAndroidLogger(LOGGING_TAG, IAndroidLogger.LoggingLevel.VERBOSE);
         ApiServiceLogLevel = RestAdapter.LogLevel.FULL;
         LeakCanary.install(this);
         Stetho.initialize(Stetho.newInitializerBuilder(this)
@@ -106,7 +97,6 @@ public class App extends MultiDexApplication {
     }
 
     protected void initRelease() {
-        L = new AndroidLogger(LOGGING_TAG, IAndroidLogger.LoggingLevel.WARNING);
         ApiServiceLogLevel = RestAdapter.LogLevel.NONE;
     }
 }
